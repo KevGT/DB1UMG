@@ -1,0 +1,826 @@
+
+create table ALERTAS 
+(
+   ID_ALERTA            VARCHAR2(12)         not null,
+   ID_EMAIL             NUMBER(12),
+   ID_TELEFONO          NUMBER(12),
+   ALERTA               VARCHAR2(50),
+   constraint PK_ALERTAS primary key (ID_ALERTA)
+);
+
+
+create table CAJA_RECEPTORA 
+(
+   ID_CAJA_RECEPTORA    NUMBER(12)           not null,
+   ID_TURNO             NUMBER(12),
+   ID_VENTA             NUMBER(12),
+   SALDO_INICIAL        DOUBLE PRECISION,
+   SALDO_FINAL          DOUBLE PRECISION,
+   FECHA                DATE,
+   HORA_APERTURA        TIMESTAMP,
+   HORA_CIERRE          TIMESTAMP,
+   constraint PK_CAJA_RECEPTORA primary key (ID_CAJA_RECEPTORA)
+);
+
+
+create table CATEGORIA_PRODUCTO 
+(
+   ID_TIPO_PRODUCTO     NUMBER(12)           not null,
+   CATEGORIA_PRODUCTO   VARCHAR2(25),
+   constraint PK_CATEGORIA_PRODUCTO primary key (ID_TIPO_PRODUCTO)
+);
+
+
+create table CLIENTE 
+(
+   ID_CLIENTE           NUMBER(12)           not null,
+   ID_PERSONA           NUMBER(12),
+   ID_TIPO_CLIENTE      NUMBER(12),
+   constraint PK_CLIENTE primary key (ID_CLIENTE)
+);
+
+
+create table CONTENIDO_ENVIO 
+(
+   ID_CONTENIDO_ENVIO   VARCHAR2(12)         not null,
+   ID_ENVIO             NUMBER(12),
+   CONTENIDO            VARCHAR2(12),
+   constraint PK_CONTENIDO_ENVIO primary key (ID_CONTENIDO_ENVIO)
+);
+
+
+create table DEPARTAMENTO 
+(
+   ID_DEPARTAMENTO      NUMBER(12)           not null,
+   ID_PAIS              NUMBER(12),
+   DEPARTAMENTO         VARCHAR2(45),
+   constraint PK_DEPARTAMENTO primary key (ID_DEPARTAMENTO)
+);
+
+
+create table DESTINATARIO 
+(
+   ID_DESTINATARIO      NUMBER(12)           not null,
+   ID_EMPRESA           NUMBER(12),
+   ID_USUARIO           NUMBER(12),
+   constraint PK_DESTINATARIO primary key (ID_DESTINATARIO)
+);
+
+
+create table DETALLE_ENVIO 
+(
+   ID_PAQUETE           NUMBER(12),
+   ID_DETALLE_ENVIO     NUMBER(12)           not null,
+   FECHA_ENVIO          DATE,
+   EMBALAJE             VARCHAR2(50),
+   PESO_TOTAL           NUMBER(12),
+   VALOR_TRANSPORTE     NUMBER(12),
+   COSTO_ESTIMADO       NUMBER(12),
+   REFERENCIA           VARCHAR2(90),
+   constraint PK_DETALLE_ENVIO primary key (ID_DETALLE_ENVIO)
+);
+
+
+create table DETALLE_FACTURA 
+(
+   ID_DETALLE_FACTURA   NUMBER(12)           not null,
+   ID_FACTURA           NUMBER(12),
+   ID_PRODUCTO          NUMBER(12),
+   ID_EMPRESA           NUMBER(12),
+   ID_IMPUESTO          NUMBER(12),
+   ID_USUARIO           NUMBER(12),
+   ID_PROMOCION         number(12),
+   PRECIO               NUMBER(12),
+   DESCUENTO            NUMBER(12),
+   TOTAL                NUMBER(12),
+   constraint PK_DETALLE_FACTURA primary key (ID_DETALLE_FACTURA)
+);
+
+
+create table DETALLE_PAGO 
+(
+   ID_DETALLE_PAGO      NUMBER(12)           not null,
+   ID_MODO_PAGO         VARCHAR2(12),
+   ID_PAGO              NUMBER(12),
+   MONTO                DOUBLE PRECISION,
+   constraint PK_DETALLE_PAGO primary key (ID_DETALLE_PAGO)
+);
+
+
+create table DEVOLUCIONES 
+(
+   ID_DEVOLUCION        NUMBER(12)           not null,
+   DEVOLUCION           VARCHAR2(65),
+   DESCRIPCION          VARCHAR2(75),
+   constraint PK_DEVOLUCIONES primary key (ID_DEVOLUCION)
+);
+
+
+create table DIRECCION 
+(
+   ID_DIRECCION         NUMBER(12)           not null,
+   ID_MUNICIPIO         NUMBER(12),
+   DIRECCION            VARCHAR2(50),
+   CODIGO_POSTAL        NUMBER(12),
+   constraint PK_DIRECCION primary key (ID_DIRECCION)
+);
+
+
+create table DOCUMENTO 
+(
+   ID_DOCUMENTO         VARCHAR2(50)         not null,
+   TIP_ID_DOCUMENTO     NUMBER(12),
+   ID_DIRECCION         NUMBER(12),
+   ID_PERSONA           NUMBER(12),
+   constraint PK_DOCUMENTO primary key (ID_DOCUMENTO)
+);
+
+create table EMAIL 
+(
+   ID_EMAIL             NUMBER(12)           not null,
+   ID_TIPO_EMAIL        NUMBER(12),
+   DIRECCION_EMAIL      VARCHAR2(60),
+   EMPRESA_EMAIL        VARCHAR2(80),
+   constraint PK_EMAIL primary key (ID_EMAIL)
+);
+
+
+create table ENVIOS 
+(
+   ID_ENVIO             NUMBER(12)           not null,
+   ID_DETALLE_ENVIO     NUMBER(12),
+   ID_DESTINATARIO      NUMBER(12),
+   ID_SERVICIO          NUMBER(12),
+   ID_MANEJO            NUMBER(12),
+   ID_ALERTA            VARCHAR2(12),
+   ID_USUARIO           NUMBER(12),
+   ID_ESTADO            NUMBER(12),
+   ID_DIRECCION         NUMBER(12),
+   ID_PRODUCTO          NUMBER(12),
+   ID_DEVOLUCION        NUMBER(12),
+   ENVIO                VARCHAR2(45),
+   FECHA                DATE,
+   constraint PK_ENVIOS primary key (ID_ENVIO)
+);
+
+
+create table FACTURA 
+(
+   ID_FACTURA           NUMBER(12)           not null,
+   ID_CLIENTE           NUMBER(12),
+   ID_ESTADO            NUMBER(12),
+   FECHA                TIMESTAMP,
+   constraint PK_FACTURA primary key (ID_FACTURA)
+);
+
+
+create table GARANTIA 
+(
+   ID_GARANTIA          NUMBER(12)           not null,
+   ID_TIPO_GARANTIA     NUMBER(12),
+   ID_CLIENTE           NUMBER(12),
+   ID_PRODUCTO          NUMBER(12),
+   GARANTIA             VARCHAR2(60),
+   FECHA_INICIO_G       DATE,
+   FECHA_FIN_G          DATE,
+   DESCRIPCION          VARCHAR2(60),
+   OBSERVACIONES        VARCHAR2(190),
+   constraint PK_GARANTIA primary key (ID_GARANTIA)
+);
+
+
+create table ID_TIPO_PAQUETE 
+(
+   ID_TIPO_PAQUETE      NUMBER(12)           not null,
+   TIPO_PAQUETE         VARCHAR2(60),
+   LARGO                NUMBER(12),
+   ANCHO                NUMBER(12),
+   PROFUNDIDA           NUMBER(12),
+   PESO                 NUMBER(12),
+   constraint PK_ID_TIPO_PAQUETE primary key (ID_TIPO_PAQUETE)
+);
+
+
+create table IMPUESTO 
+(
+   ID_IMPUESTO          NUMBER(12)           not null,
+   TIP_ID_IMPUESTO      VARCHAR2(12),
+   IMPUESTO             NUMBER(12),
+   constraint PK_IMPUESTO primary key (ID_IMPUESTO)
+);
+
+
+create table KARDEX 
+(
+   ID_KARDEX            NUMBER(12)           not null,
+   ID_MOVIMIENTO        NUMBER(12),
+   ID_PROVEEDOR         VARCHAR2(12),
+   ID_PRODUCTO          NUMBER(12),
+   PRECIO_COMPRA        DOUBLE PRECISION,
+   PRECIO_VENTA         DOUBLE PRECISION,
+   STOCK_ANTERIOR       NUMBER(12),
+   STOCK_ACTUAL         NUMBER(12),
+   TIPO                 VARCHAR2(10),
+   CANTIDAD             NUMBER(12),
+   constraint PK_KARDEX primary key (ID_KARDEX)
+);
+
+
+create table MANEJO 
+(
+   ID_MANEJO            NUMBER(12)           not null,
+   MANEJO               VARCHAR2(60),
+   constraint PK_MANEJO primary key (ID_MANEJO)
+);
+
+
+create table MAN_ESTADOS 
+(
+   ID_ESTADO            NUMBER(12)           not null,
+   ID_TESTADO           NUMBER(12),
+   ESTADO               VARCHAR2(45),
+   constraint PK_MAN_ESTADOS primary key (ID_ESTADO)
+);
+
+
+create table MODO_PAGO 
+(
+   ID_MODO_PAGO         VARCHAR2(12)         not null,
+   MODO_PAGO            VARCHAR2(80),
+   constraint PK_MODO_PAGO primary key (ID_MODO_PAGO)
+);
+
+
+create table MOVIMIENTO 
+(
+   ID_MOVIMIENTO        NUMBER(12)           not null,
+   FACTURA              VARCHAR2(60),
+   FECHA_FACTURA        DATE,
+   FECHA_SALIDA         TIMESTAMP,
+   RESPONSABLE          VARCHAR2(60),
+   TIPO_MOVIMIENTO      VARCHAR2(60),
+   MOVIMIENTO           VARCHAR2(80),
+   constraint PK_MOVIMIENTO primary key (ID_MOVIMIENTO)
+);
+
+
+create table MUNICIPIO 
+(
+   ID_MUNICIPIO         NUMBER(12)           not null,
+   ID_DEPARTAMENTO      NUMBER(12),
+   MUNICIPIO            VARCHAR2(60),
+   constraint PK_MUNICIPIO primary key (ID_MUNICIPIO)
+);
+
+
+create table NEGOCIO 
+(
+   ID_EMPRESA           NUMBER(12)           not null,
+   ID_DOCUMENTO         VARCHAR2(50),
+   ID_EMAIL             NUMBER(12),
+   ID_TELEFONO          NUMBER(12),
+   NOMBRE               VARCHAR2(50),
+   constraint PK_NEGOCIO primary key (ID_EMPRESA)
+);
+
+
+create table PAGO 
+(
+   ID_PAGO              NUMBER(12)           not null,
+   ID_CLIENTE           NUMBER(12),
+   FECHA                TIMESTAMP,
+   MONTO_TOTAL          DOUBLE PRECISION,
+   constraint PK_PAGO primary key (ID_PAGO)
+);
+
+
+create table PAIS 
+(
+   ID_PAIS              NUMBER(12)           not null,
+   PAIS                 VARCHAR2(60),
+   constraint PK_PAIS primary key (ID_PAIS)
+);
+
+
+create table PAQUETE 
+(
+   ID_PAQUETE           NUMBER(12)           not null,
+   ID_TIPO_PAQUETE      NUMBER(12),
+   PAQUETE              VARCHAR2(60),
+   constraint PK_PAQUETE primary key (ID_PAQUETE)
+);
+
+
+create table PERSONA 
+(
+   ID_PERSONA           NUMBER(12)           not null,
+   ID_TELEFONO          NUMBER(12),
+   ID_EMAIL             NUMBER(12),
+   APELLIDO_PATERNO     VARCHAR2(25),
+   APELLIDO_MATERNO     VARCHAR2(30),
+   PRIMER_NOMBRE        VARCHAR2(35),
+   SEGUNDO_NOMBRE       VARCHAR2(35),
+   SEXO                 CHAR(2),
+   EDAD                 DATE,
+   constraint PK_PERSONA primary key (ID_PERSONA)
+);
+
+
+create table PRODUCTO 
+(
+   ID_PRODUCTO          NUMBER(12)           not null,
+   ID_TIPO_PRODUCTO     NUMBER(12),
+   ID_UNIDAD_MEDIDA     NUMBER(12),
+   NOMBRE_PRODUCTO      VARCHAR2(40),
+   CANTIDAD_MINIMA      NUMBER(12),
+   CANTIDAD_MAXIMA      NUMBER(12),
+   EXISTENCIA_PRODUCTO  NUMBER(12),
+   PRECIO_COSTO_PRODUCTO NUMBER(12),
+   PRECIO_VENTA_PRODUCTO NUMBER(12),
+   ACTIVO_PRODUCTO      NUMBER(12),
+   constraint PK_PRODUCTO primary key (ID_PRODUCTO)
+);
+
+
+create table PROMOCION 
+(
+   ID_PROMOCION         number(12)           not null,
+   ID_CLIENTE           NUMBER(12),
+   TIPO                 VARCHAR2(80),
+   COSTO                DOUBLE PRECISION,
+   INICIO_PROMO         DATE,
+   FIN_PROMO            DATE,
+   ESTADO_PROMO         VARCHAR2(30),
+   DESCRIP_PROMO        VARCHAR2(120),
+   constraint PK_PROMOCION primary key (ID_PROMOCION)
+);
+
+
+create table PROVEEDOR 
+(
+   ID_PROVEEDOR         VARCHAR2(12)         not null,
+   ID_TELEFONO          NUMBER(12),
+   ID_DIRECCION         NUMBER(12),
+   ID_EMAIL             NUMBER(12),
+   NOMBRE_EMPRESA       VARCHAR2(50),
+   constraint PK_PROVEEDOR primary key (ID_PROVEEDOR)
+);
+
+
+create table REMITENTE 
+(
+   ID_REMITENTE         NUMBER(12)           not null,
+   ID_EMPRESA           NUMBER(12),
+   ID_FACTURA           NUMBER(12),
+   ID_USUARIO           NUMBER(12),
+   ID_CONTENIDO_ENVIO   VARCHAR2(12),
+   constraint PK_REMITENTE primary key (ID_REMITENTE)
+);
+
+
+create table REPARACIONES 
+(
+   DESCRIPCION2         VARCHAR2(190),
+   COSTO                NUMBER(12),
+   FECHA_RECIBO         DATE,
+   FECHA_FECHA_ENTREGA  DATE,
+   ID_REPARACION        NUMBER(12)           not null,
+   ID_REPACION          NUMBER(12),
+   ID_GARANTIA          NUMBER(12),
+   REPACION             VARCHAR2(12),
+   DESCRIPCION          VARCHAR2(12),
+   constraint PK_REPARACIONES primary key (ID_REPARACION)
+);
+
+
+create table SERVICIO 
+(
+   ID_SERVICIO          NUMBER(12)           not null,
+   SERVICIO             VARCHAR2(12),
+   constraint PK_SERVICIO primary key (ID_SERVICIO)
+);
+
+
+create table TELEFONO 
+(
+   ID_TELEFONO          NUMBER(12)           not null,
+   NOMERO_TELEFONO      VARCHAR2(50),
+   EMPRESA_TELEFONICA   VARCHAR2(50),
+   constraint PK_TELEFONO primary key (ID_TELEFONO)
+);
+
+
+create table TIPO_CLIENTE 
+(
+   ID_TIPO_CLIENTE      NUMBER(12)           not null,
+   TIPO_CLIENTE         VARCHAR2(60),
+   constraint PK_TIPO_CLIENTE primary key (ID_TIPO_CLIENTE)
+);
+
+
+create table TIPO_DOCUMENTO 
+(
+   ID_DOCUMENTO         NUMBER(12)           not null,
+   DOCUMENTO            VARCHAR2(40),
+   constraint PK_TIPO_DOCUMENTO primary key (ID_DOCUMENTO)
+);
+
+
+create table TIPO_EMAIL 
+(
+   ID_TIPO_EMAIL        NUMBER(12)           not null,
+   TIPO_EMAIL           VARCHAR2(50),
+   constraint PK_TIPO_EMAIL primary key (ID_TIPO_EMAIL)
+);
+
+
+create table TIPO_ESTADO 
+(
+   ID_TESTADO           NUMBER(12)           not null,
+   TIPO_ESTADO          VARCHAR2(45),
+   constraint PK_TIPO_ESTADO primary key (ID_TESTADO)
+);
+
+
+create table TIPO_GARANTIA 
+(
+   ID_TIPO_GARANTIA     NUMBER(12)           not null,
+   TIPO_GARANTIA        VARCHAR2(60),
+   constraint PK_TIPO_GARANTIA primary key (ID_TIPO_GARANTIA)
+);
+
+
+create table TIPO_IMPUESTO 
+(
+   ID_IMPUESTO          VARCHAR2(12)         not null,
+   TIPO_IMPUESTO        VARCHAR2(80),
+   constraint PK_TIPO_IMPUESTO primary key (ID_IMPUESTO)
+);
+
+
+create table TIPO_REPARACION 
+(
+   ID_REPACION          NUMBER(12)           not null,
+   REPARACION           VARCHAR2(12),
+   constraint PK_TIPO_REPARACION primary key (ID_REPACION)
+);
+
+
+create table TIPO_TELEFONO 
+(
+   ID_TELEFONO          NUMBER(12)           not null,
+   TIPO_TELEFONO        VARCHAR2(50),
+   constraint PK_TIPO_TELEFONO primary key (ID_TELEFONO)
+);
+
+
+create table TIPO_TURNO 
+(
+   ID_TIPO_TURNO        NUMBER(12)           not null,
+   TIPO_TURNO           VARCHAR2(80),
+   constraint PK_TIPO_TURNO primary key (ID_TIPO_TURNO)
+);
+
+
+create table TIPO_USUARIO 
+(
+   ID_TIPO_USUARIO      NUMBER(12)           not null,
+   TIPO_USUARIO         VARCHAR2(60),
+   DESCRIPCION          VARCHAR2(60),
+   constraint PK_TIPO_USUARIO primary key (ID_TIPO_USUARIO)
+);
+
+
+create table TIPO_VENTA 
+(
+   ID_TIPO_VENTA        NUMBER(12)           not null,
+   TIPO_VENTA           VARCHAR2(60),
+   DESCRIP_VENTA        VARCHAR2(120),
+   constraint PK_TIPO_VENTA primary key (ID_TIPO_VENTA)
+);
+
+
+create table TURNO 
+(
+   ID_TIPO_TURNO        NUMBER(12),
+   ID_USUARIO           NUMBER(12),
+   ID_TURNO             NUMBER(12)           not null,
+   FECHA                DATE,
+   HORA                 TIMESTAMP,
+   constraint PK_TURNO primary key (ID_TURNO)
+);
+
+
+create table UNIDAD_MEDIDA 
+(
+   ID_UNIDAD_MEDIDA     NUMBER(12)           not null,
+   NOMBRE_UNIDAD_MEDIDA VARCHAR2(20),
+   CANTIDAD_UNIDAD_MEDIDA NUMBER(12),
+   constraint PK_UNIDAD_MEDIDA primary key (ID_UNIDAD_MEDIDA)
+);
+
+
+create table USUARIO 
+(
+   ID_USUARIO           NUMBER(12)           not null,
+   ID_TIPO_USUARIO      NUMBER(12),
+   ID_PERSONA           NUMBER(12),
+   LOGIN                VARCHAR2(60),
+   PASSWORD             VARCHAR2(60),
+   FECHA_ALTA           DATE,
+   FECHA_BAJA           DATE,
+   constraint PK_USUARIO primary key (ID_USUARIO)
+);
+
+
+create table VENTA 
+(
+   ID_VENTA             NUMBER(12)           not null,
+   ID_TIPO_VENTA        NUMBER(12),
+   ID_CLIENTE           NUMBER(12),
+   constraint PK_VENTA primary key (ID_VENTA)
+);
+
+alter table ALERTAS
+   add constraint FK_ALERTAS_REFERENCE_EMAIL foreign key (ID_EMAIL)
+      references EMAIL (ID_EMAIL);
+
+alter table ALERTAS
+   add constraint FK_ALERTAS_REFERENCE_TELEFONO foreign key (ID_TELEFONO)
+      references TELEFONO (ID_TELEFONO);
+
+alter table CAJA_RECEPTORA
+   add constraint FK_CAJA_REC_REFERENCE_TURNO foreign key (ID_TURNO)
+      references TURNO (ID_TURNO);
+
+alter table CAJA_RECEPTORA
+   add constraint FK_CAJA_REC_REFERENCE_VENTA foreign key (ID_VENTA)
+      references VENTA (ID_VENTA);
+
+alter table CLIENTE
+   add constraint FK_CLIENTE_REFERENCE_PERSONA foreign key (ID_PERSONA)
+      references PERSONA (ID_PERSONA);
+
+alter table CLIENTE
+   add constraint FK_CLIENTE_REFERENCE_TIPO_CLI foreign key (ID_TIPO_CLIENTE)
+      references TIPO_CLIENTE (ID_TIPO_CLIENTE);
+
+alter table CONTENIDO_ENVIO
+   add constraint FK_CONTENID_REFERENCE_ENVIOS foreign key (ID_ENVIO)
+      references ENVIOS (ID_ENVIO);
+
+alter table DEPARTAMENTO
+   add constraint FK_DEPARTAM_REFERENCE_PAIS foreign key (ID_PAIS)
+      references PAIS (ID_PAIS);
+
+alter table DESTINATARIO
+   add constraint FK_DESTINAT_REFERENCE_USUARIO foreign key (ID_USUARIO)
+      references USUARIO (ID_USUARIO);
+
+alter table DESTINATARIO
+   add constraint FK_DESTINAT_REFERENCE_NEGOCIO foreign key (ID_EMPRESA)
+      references NEGOCIO (ID_EMPRESA);
+
+alter table DETALLE_ENVIO
+   add constraint FK_DETALLE__REFERENCE_PAQUETE foreign key (ID_PAQUETE)
+      references PAQUETE (ID_PAQUETE);
+
+alter table DETALLE_FACTURA
+   add constraint FK_DETALLE__REFERENCE_FACTURA foreign key (ID_FACTURA)
+      references FACTURA (ID_FACTURA);
+
+alter table DETALLE_FACTURA
+   add constraint FK_DETALLE__REFERENCE_PRODUCTO foreign key (ID_PRODUCTO)
+      references PRODUCTO (ID_PRODUCTO);
+
+alter table DETALLE_FACTURA
+   add constraint FK_DETALLE__REFERENCE_NEGOCIO foreign key (ID_EMPRESA)
+      references NEGOCIO (ID_EMPRESA);
+
+alter table DETALLE_FACTURA
+   add constraint FK_DETALLE__REFERENCE_IMPUESTO foreign key (ID_IMPUESTO)
+      references IMPUESTO (ID_IMPUESTO);
+
+alter table DETALLE_FACTURA
+   add constraint FK_DETALLE__REFERENCE_PROMOCIO foreign key (ID_PROMOCION)
+      references PROMOCION (ID_PROMOCION);
+
+alter table DETALLE_FACTURA
+   add constraint FK_DETALLE__REFERENCE_USUARIO foreign key (ID_USUARIO)
+      references USUARIO (ID_USUARIO);
+
+alter table DETALLE_PAGO
+   add constraint FK_DETALLE__REFERENCE_MODO_PAG foreign key (ID_MODO_PAGO)
+      references MODO_PAGO (ID_MODO_PAGO);
+
+alter table DETALLE_PAGO
+   add constraint FK_DETALLE__REFERENCE_PAGO foreign key (ID_PAGO)
+      references PAGO (ID_PAGO);
+
+alter table DIRECCION
+   add constraint FK_DIRECCIO_REFERENCE_MUNICIPI foreign key (ID_MUNICIPIO)
+      references MUNICIPIO (ID_MUNICIPIO);
+
+alter table DOCUMENTO
+   add constraint FK_DOCUMENT_REFERENCE_TIPO_DOC foreign key (TIP_ID_DOCUMENTO)
+      references TIPO_DOCUMENTO (ID_DOCUMENTO);
+
+alter table DOCUMENTO
+   add constraint FK_DOCUMENT_REFERENCE_DIRECCIO foreign key (ID_DIRECCION)
+      references DIRECCION (ID_DIRECCION);
+
+alter table DOCUMENTO
+   add constraint FK_DOCUMENT_REFERENCE_PERSONA foreign key (ID_PERSONA)
+      references PERSONA (ID_PERSONA);
+
+alter table EMAIL
+   add constraint FK_EMAIL_REFERENCE_TIPO_EMA foreign key (ID_TIPO_EMAIL)
+      references TIPO_EMAIL (ID_TIPO_EMAIL);
+
+alter table ENVIOS
+   add constraint FK_ENVIOS_REFERENCE_DETALLE_ foreign key (ID_DETALLE_ENVIO)
+      references DETALLE_ENVIO (ID_DETALLE_ENVIO);
+
+alter table ENVIOS
+   add constraint FK_ENVIOS_REFERENCE_DESTINAT foreign key (ID_DESTINATARIO)
+      references DESTINATARIO (ID_DESTINATARIO);
+
+alter table ENVIOS
+   add constraint FK_ENVIOS_REFERENCE_SERVICIO foreign key (ID_SERVICIO)
+      references SERVICIO (ID_SERVICIO);
+
+alter table ENVIOS
+   add constraint FK_ENVIOS_REFERENCE_MANEJO foreign key (ID_MANEJO)
+      references MANEJO (ID_MANEJO);
+
+alter table ENVIOS
+   add constraint FK_ENVIOS_REFERENCE_ALERTAS foreign key (ID_ALERTA)
+      references ALERTAS (ID_ALERTA);
+
+alter table ENVIOS
+   add constraint FK_ENVIOS_REFERENCE_USUARIO foreign key (ID_USUARIO)
+      references USUARIO (ID_USUARIO);
+
+alter table ENVIOS
+   add constraint FK_ENVIOS_REFERENCE_MAN_ESTA foreign key (ID_ESTADO)
+      references MAN_ESTADOS (ID_ESTADO);
+
+alter table ENVIOS
+   add constraint FK_ENVIOS_REFERENCE_DIRECCIO foreign key (ID_DIRECCION)
+      references DIRECCION (ID_DIRECCION);
+
+alter table ENVIOS
+   add constraint FK_ENVIOS_REFERENCE_PRODUCTO foreign key (ID_PRODUCTO)
+      references PRODUCTO (ID_PRODUCTO);
+
+alter table ENVIOS
+   add constraint FK_ENVIOS_REFERENCE_DEVOLUCI foreign key (ID_DEVOLUCION)
+      references DEVOLUCIONES (ID_DEVOLUCION);
+
+alter table FACTURA
+   add constraint FK_FACTURA_REFERENCE_CLIENTE foreign key (ID_CLIENTE)
+      references CLIENTE (ID_CLIENTE);
+
+alter table FACTURA
+   add constraint FK_FACTURA_REFERENCE_MAN_ESTA foreign key (ID_ESTADO)
+      references MAN_ESTADOS (ID_ESTADO);
+
+alter table GARANTIA
+   add constraint FK_GARANTIA_REFERENCE_TIPO_GAR foreign key (ID_TIPO_GARANTIA)
+      references TIPO_GARANTIA (ID_TIPO_GARANTIA);
+
+alter table GARANTIA
+   add constraint FK_GARANTIA_REFERENCE_CLIENTE foreign key (ID_CLIENTE)
+      references CLIENTE (ID_CLIENTE);
+
+alter table GARANTIA
+   add constraint FK_GARANTIA_REFERENCE_PRODUCTO foreign key (ID_PRODUCTO)
+      references PRODUCTO (ID_PRODUCTO);
+
+alter table IMPUESTO
+   add constraint FK_IMPUESTO_REFERENCE_TIPO_IMP foreign key (TIP_ID_IMPUESTO)
+      references TIPO_IMPUESTO (ID_IMPUESTO);
+
+alter table KARDEX
+   add constraint FK_KARDEX_REFERENCE_MOVIMIEN foreign key (ID_MOVIMIENTO)
+      references MOVIMIENTO (ID_MOVIMIENTO);
+
+alter table KARDEX
+   add constraint FK_KARDEX_REFERENCE_PROVEEDO foreign key (ID_PROVEEDOR)
+      references PROVEEDOR (ID_PROVEEDOR);
+
+alter table KARDEX
+   add constraint FK_KARDEX_REFERENCE_PRODUCTO foreign key (ID_PRODUCTO)
+      references PRODUCTO (ID_PRODUCTO);
+
+alter table MAN_ESTADOS
+   add constraint FK_MAN_ESTA_REFERENCE_TIPO_EST foreign key (ID_TESTADO)
+      references TIPO_ESTADO (ID_TESTADO);
+
+alter table MUNICIPIO
+   add constraint FK_MUNICIPI_REFERENCE_DEPARTAM foreign key (ID_DEPARTAMENTO)
+      references DEPARTAMENTO (ID_DEPARTAMENTO);
+
+alter table NEGOCIO
+   add constraint FK_NEGOCIO_REFERENCE_DOCUMENT foreign key (ID_DOCUMENTO)
+      references DOCUMENTO (ID_DOCUMENTO);
+
+alter table NEGOCIO
+   add constraint FK_NEGOCIO_REFERENCE_EMAIL foreign key (ID_EMAIL)
+      references EMAIL (ID_EMAIL);
+
+alter table NEGOCIO
+   add constraint FK_NEGOCIO_REFERENCE_TELEFONO foreign key (ID_TELEFONO)
+      references TELEFONO (ID_TELEFONO);
+
+alter table PAGO
+   add constraint FK_PAGO_REFERENCE_CLIENTE foreign key (ID_CLIENTE)
+      references CLIENTE (ID_CLIENTE);
+
+alter table PAQUETE
+   add constraint FK_PAQUETE_REFERENCE_ID_TIPO_ foreign key (ID_TIPO_PAQUETE)
+      references ID_TIPO_PAQUETE (ID_TIPO_PAQUETE);
+
+alter table PERSONA
+   add constraint FK_PERSONA_REFERENCE_EMAIL foreign key (ID_EMAIL)
+      references EMAIL (ID_EMAIL);
+
+alter table PERSONA
+   add constraint FK_PERSONA_REFERENCE_TELEFONO foreign key (ID_TELEFONO)
+      references TELEFONO (ID_TELEFONO);
+
+alter table PRODUCTO
+   add constraint FK_PRODUCTO_REFERENCE_UNIDAD_M foreign key (ID_UNIDAD_MEDIDA)
+      references UNIDAD_MEDIDA (ID_UNIDAD_MEDIDA);
+
+alter table PRODUCTO
+   add constraint FK_PRODUCTO_REFERENCE_CATEGORI foreign key (ID_TIPO_PRODUCTO)
+      references CATEGORIA_PRODUCTO (ID_TIPO_PRODUCTO);
+
+alter table PROMOCION
+   add constraint FK_PROMOCIO_REFERENCE_CLIENTE foreign key (ID_CLIENTE)
+      references CLIENTE (ID_CLIENTE);
+
+alter table PROVEEDOR
+   add constraint FK_PROVEEDO_REFERENCE_TELEFONO foreign key (ID_TELEFONO)
+      references TELEFONO (ID_TELEFONO);
+
+alter table PROVEEDOR
+   add constraint FK_PROVEEDO_REFERENCE_DIRECCIO foreign key (ID_DIRECCION)
+      references DIRECCION (ID_DIRECCION);
+
+alter table PROVEEDOR
+   add constraint FK_PROVEEDO_REFERENCE_EMAIL foreign key (ID_EMAIL)
+      references EMAIL (ID_EMAIL);
+
+alter table REMITENTE
+   add constraint FK_REMITENT_REFERENCE_NEGOCIO foreign key (ID_EMPRESA)
+      references NEGOCIO (ID_EMPRESA);
+
+alter table REMITENTE
+   add constraint FK_REMITENT_REFERENCE_FACTURA foreign key (ID_FACTURA)
+      references FACTURA (ID_FACTURA);
+
+alter table REMITENTE
+   add constraint FK_REMITENT_REFERENCE_USUARIO foreign key (ID_USUARIO)
+      references USUARIO (ID_USUARIO);
+
+alter table REMITENTE
+   add constraint FK_REMITENT_REFERENCE_CONTENID foreign key (ID_CONTENIDO_ENVIO)
+      references CONTENIDO_ENVIO (ID_CONTENIDO_ENVIO);
+
+alter table REPARACIONES
+   add constraint FK_REPARACI_REFERENCE_TIPO_REP foreign key (ID_REPACION)
+      references TIPO_REPARACION (ID_REPACION);
+
+alter table REPARACIONES
+   add constraint FK_REPARACI_REFERENCE_GARANTIA foreign key (ID_GARANTIA)
+      references GARANTIA (ID_GARANTIA);
+
+alter table TELEFONO
+   add constraint FK_TELEFONO_REFERENCE_TIPO_TEL foreign key (ID_TELEFONO)
+      references TIPO_TELEFONO (ID_TELEFONO);
+
+alter table TURNO
+   add constraint FK_TURNO_REFERENCE_TIPO_TUR foreign key (ID_TIPO_TURNO)
+      references TIPO_TURNO (ID_TIPO_TURNO);
+
+alter table TURNO
+   add constraint FK_TURNO_REFERENCE_USUARIO foreign key (ID_USUARIO)
+      references USUARIO (ID_USUARIO);
+
+alter table USUARIO
+   add constraint FK_USUARIO_REFERENCE_TIPO_USU foreign key (ID_TIPO_USUARIO)
+      references TIPO_USUARIO (ID_TIPO_USUARIO);
+
+alter table USUARIO
+   add constraint FK_USUARIO_REFERENCE_PERSONA foreign key (ID_PERSONA)
+      references PERSONA (ID_PERSONA);
+
+alter table VENTA
+   add constraint FK_VENTA_REFERENCE_TIPO_VEN foreign key (ID_TIPO_VENTA)
+      references TIPO_VENTA (ID_TIPO_VENTA);
+
+alter table VENTA
+   add constraint FK_VENTA_REFERENCE_CLIENTE foreign key (ID_CLIENTE)
+      references CLIENTE (ID_CLIENTE);
