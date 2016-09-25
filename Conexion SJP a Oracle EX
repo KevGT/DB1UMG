@@ -1,0 +1,25 @@
+
+package Modelo;
+
+import java.sql.*;
+public class Conexion {
+    
+private static String servidor="jdbc:oracle:thin:@localhost:1521:XE";
+    private static String user="system";
+    private static String c
+    private static String driver="oracle.jdbc.driver.OracleDriver";
+    private static Connection conexion;
+    
+    public Conexion() throws SQLException{
+        try {
+            Class.forName(driver);
+            conexion=DriverManager.getConnection(servidor, user, pass);
+            System.out.println("Conectado");
+        } catch (ClassNotFoundException SQLException) {
+            System.out.println("NO conectado");
+        }
+    
+    }
+    
+}
+}
